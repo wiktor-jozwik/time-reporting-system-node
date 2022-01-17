@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.static(path));
 
-var corsOptions = {
+const corsOptions = {
   origin: "http://localhost:8081"
 };
 
@@ -16,18 +16,16 @@ db.sequelize.sync();
 
 app.use(cors(corsOptions));
 
-// parse requests of content-type - application/json
 app.use(bodyParser.json());
 
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req,res) => {
   res.sendFile(path + "index.html");
 });
 require("./app/routes/activity.route")(app);
+require("./app/routes/entry.route")(app);
 
-// set port, listen for requests
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {

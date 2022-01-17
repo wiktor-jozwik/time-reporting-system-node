@@ -20,5 +20,12 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.activities = require("./activity.model.js")(sequelize, Sequelize);
+db.entries = require("./entry.model")(sequelize, Sequelize)
+
+db.activities.hasMany(db.entries, {as: 'entries'})
+db.entries.belongsTo(db.activities, {
+  foreignKey: "activityId",
+  as: "activity",
+});
 
 module.exports = db;

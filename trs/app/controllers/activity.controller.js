@@ -29,7 +29,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    Activity.findAll()
+    Activity.findAll({include: ["entries"]})
         .then(data => {
             res.send(data)
         })

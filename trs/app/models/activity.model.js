@@ -1,13 +1,13 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, DataTypes) => {
     return sequelize.define("activity", {
         code: {
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         },
         budget: {
-            type: Sequelize.INTEGER
+            type: DataTypes.INTEGER
         },
         active: {
-            type: Sequelize.BOOLEAN
+            type: DataTypes.BOOLEAN
         }
     });
 };
