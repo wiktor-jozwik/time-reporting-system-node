@@ -1,21 +1,16 @@
 const db = require("../models");
+const getLoggedUserId = require("../services/user.service");
 const Entry = db.entries;
-const Op = db.Sequelize.Op;
 
-exports.create = (req, res) => {
-    // if (!req.body.code) {
-    //     res.status(400).send({
-    //         message: "Content can not be empty!"
-    //     });
-    //     return;
-    // }
-
+exports.create = async (req, res) => {
+    const userId = await getLoggedUserId()
     const entry = {
         date: req.body.date,
         subCode: req.body.subCode,
         time: req.body.time,
         description: req.body.description,
-        activityId: req.body.activityId
+        activityId: req.body.activityId,
+        userId: userId
     };
 
     Entry.create(entry)

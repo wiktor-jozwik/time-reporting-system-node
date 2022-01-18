@@ -1,6 +1,5 @@
 const db = require("../models");
 const Activity = db.activities;
-const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
     if (!req.body.code) {
