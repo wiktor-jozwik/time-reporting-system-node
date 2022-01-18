@@ -1,40 +1,44 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Link, Route, Switch} from "react-router-dom";
-import ActivityList from "./components/ActivityList";
-import ActivityAdd from "./components/ActivityAdd";
-import Activity from "./components/Activity";
+import EntryList from "./components/EntryList";
+import EntryAdd from "./components/EntryAdd";
+import Entry from "./components/Entry";
+import Login from "./components/Login";
+import Activities from "./components/Activities";
 
 const App = () => {
-  return (
-      <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          {/*<a href="/activities" className="navbar-brand">*/}
-          {/*  Activities*/}
-          {/*</a>*/}
-          <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/activities"} className="nav-link">
-                Activities
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to={"/add"} className="nav-link">
-                Add
-              </Link>
-            </li>
-          </div>
-        </nav>
+    return (
+        <div>
+            <nav className="navbar navbar-expand navbar-dark bg-dark">
+                <div className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <Link to={"/login"} className="nav-link">
+                            Login
+                        </Link>
+                        <Link to={"/activities"} className="nav-link">
+                            Activities
+                        </Link>
 
-        <div className="container mt-3">
-          <Switch>
-            <Route exact path={["/", "/activities"]} component={ActivityList} />
-            <Route exact path="/activities/add" component={ActivityAdd} />
-            <Route path="/activities/:id" component={Activity} />
-          </Switch>
+                        <Link to={"/entries"} className="nav-link">
+                            Entries
+                        </Link>
+                    </li>
+                </div>
+            </nav>
+
+            <div className="container mt-3">
+                <Switch>
+                    <Route exact path="/login" component={Login}/>
+                    <Route exact path="/activities" component={Activities}/>
+
+                    <Route exact path={["/", "/entries"]} component={EntryList}/>
+                    <Route exact path="/entries/add" component={EntryAdd}/>
+                    <Route path="/entries/:id" component={Entry}/>
+                </Switch>
+            </div>
         </div>
-      </div>
-  );
+    );
 }
 
 export default App;

@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import ActivityDataService from "../services/ActivityService";
+import EntryDataService from "../services/EntryService";
 import { Link } from "react-router-dom";
 
-const ActivityList = () => {
-    const [activities, setActivities] = useState([])
+const EntryList = () => {
+    const [entries, setEntries] = useState([])
 
     useEffect(() => {
         fetchActivities();
     }, []);
 
     const fetchActivities = () => {
-        ActivityDataService.getAll()
+        EntryDataService.getAll()
             .then(response => {
-                setActivities(response.data);
+                setEntries(response.data);
                 console.log(response.data);
             })
             .catch(e => {
@@ -20,14 +20,16 @@ const ActivityList = () => {
             });
     };
 
+    console.log(entries)
+
     return (
         <div className="list row">
             <div className="col-md-6">
-                <h4>Activity List</h4>
+                <h4>Entry List</h4>
 
                 <ul className="list-group">
-                    {activities &&
-                        activities.map((activity, index) => (
+                    {entries &&
+                        entries.map((activity, index) => (
                             <li
                                 className={
                                     "list-group-item"
@@ -38,7 +40,7 @@ const ActivityList = () => {
                                 {activity.budget}
 
                                 <Link
-                                    to={"/activities/" + activity.id}
+                                    to={"/entries/" + activity.id}
                                 >
                                     Edit
                                 </Link>
@@ -51,4 +53,4 @@ const ActivityList = () => {
     );
 };
 
-export default ActivityList;
+export default EntryList;

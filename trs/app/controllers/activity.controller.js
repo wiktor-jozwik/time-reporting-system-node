@@ -22,7 +22,7 @@ exports.create = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Activity."
+                    err.message || "Some error occurred while creating the Entry."
             });
         });
 };
@@ -35,7 +35,7 @@ exports.findAll = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Activity."
+                    err.message || "Some error occurred while creating the Entry."
             });
         })
 };
