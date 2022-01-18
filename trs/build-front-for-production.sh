@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd trs-react-front
+cd ../trs-react-front
 npm i
 npm run build
 
