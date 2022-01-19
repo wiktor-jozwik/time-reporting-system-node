@@ -14,12 +14,8 @@ const corsOptions = {
 
 const db = require("./app/models");
 
-
-// db.sequelize.sync();
-
-// For development purposes
 db.sequelize.sync().then(() => {
-    console.log("Drop and re-sync db.");
+    console.log("Generating DB data if not exist...");
     generateDbData()
 });
 
