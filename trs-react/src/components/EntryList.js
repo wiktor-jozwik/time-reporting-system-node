@@ -37,6 +37,18 @@ const EntryList = () => {
         setDate(moment(date).add(-1, 'days'))
     }
 
+    const handleDelete = (id) => {
+        EntryDataService.delete(id)
+            .then(() => {
+                setEntries(entries.filter(entry => {
+                    return entry.id !== id
+                }))
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
     return (
         <div>
             <h1 className="header">Entries for {moment(date).format('YYYY-MM-DD')}</h1>
@@ -75,6 +87,10 @@ const EntryList = () => {
                                     <Link to={"/entries/edit/" + entry.id}>
                                         Edit
                                     </Link>
+
+                                    <button onClick={() => handleDelete(entry.id)}>
+                                        Delete
+                                    </button>
 
                                 </TableCell>
                             </TableRow>
