@@ -1,36 +1,49 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useReducer} from "react";
 import EntryDataService from "../services/EntryService";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import moment from "moment";
 
-const EntryList = ({date}) => {
+const EntryList = () => {
+    const [date, setDate] = useState(moment())
+
     const [entries, setEntries] = useState([])
 
     useEffect(() => {
-        fetchActivities();
-    }, []);
+        fetchEntries();
+    }, [date]);
 
-    const fetchActivities = () => {
+    const fetchEntries = () => {
         EntryDataService.getAll()
             .then(response => {
-                setEntries(response.data.filter(activity => {
-                    if (!date) {
-                        date = moment()
-                    }
-                    return moment(activity.date) > date.startOf('day')
-                        && moment(activity.date) < date.endOf('day')
+                setEntries(response.data.filter(entry => {
+                    return moment(entry.date)
+                        .isBetween(
+                            moment(date).add(-1, 'day').format('YYYY-MM-DD'),
+                            moment(date).format('YYYY-MM-DD'),
+                            'days', '(]')
                 }));
-                console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
             });
     };
 
+    const goToNextDay = () => {
+        setDate(moment(date).add(1, 'days'))
+    }
+
+    const goToPreviousDay = () => {
+        setDate(moment(date).add(-1, 'days'))
+    }
+
     return (
         <div>
-            <h1 className="header">Entries for {moment().format('YYYY-MM-DD')}</h1>
+            <h1 className="header">Entries for {moment(date).format('YYYY-MM-DD')}</h1>
+            <div>
+                <button onClick={goToNextDay}>Next day</button>
+                <button onClick={goToPreviousDay}>Previous day</button>
+            </div>
             <TableContainer>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>

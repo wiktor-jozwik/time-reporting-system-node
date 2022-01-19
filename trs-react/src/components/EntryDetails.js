@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from "react";
 import EntryDataService from "../services/EntryService";
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import moment from "moment";
-import {Link} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import GoBackButton from "./GoBackButton";
 
-const EntryDetails = (props) => {
+const EntryDetails = () => {
     const [entry, setEntry] = useState()
-    const id = props.match.params.id
-
+    const {id} = useParams()
 
     useEffect(() => {
         fetchEntry();

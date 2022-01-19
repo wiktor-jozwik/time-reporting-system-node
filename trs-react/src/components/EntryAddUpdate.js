@@ -7,14 +7,14 @@ import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import GoBackButton from "./GoBackButton";
 import moment from "moment";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 
 
-const EntryAddUpdate = (props) => {
+const EntryAddUpdate = () => {
     const [activities, setActivities] = useState([])
     const history = useHistory()
 
-    const existingEntryId = props.match.params.id
+    const {id} = useParams()
 
     const initialEntryState = {
         id: null,
@@ -30,13 +30,13 @@ const EntryAddUpdate = (props) => {
 
     useEffect(() => {
         fetchActivities();
-        if (existingEntryId) {
+        if (id) {
             fetchExistingEntryId()
         }
     }, []);
 
     const fetchExistingEntryId = () => {
-        EntryDataService.get(existingEntryId)
+        EntryDataService.get(id)
             .then(response => {
                 setEntry(response.data);
             })
@@ -98,7 +98,7 @@ const EntryAddUpdate = (props) => {
     };
 
     const updateEntry = () => {
-        EntryDataService.update(existingEntryId, entry)
+        EntryDataService.update(id, entry)
             .then(() => {
                 setSubmitted(true);
                 history.push('/entries')
@@ -139,7 +139,7 @@ const EntryAddUpdate = (props) => {
                 </div>
             ) : (
                 <div>
-                    <form onSubmit={() => existingEntryId ? updateEntry() : saveEntry()}>
+                    <form onSubmit={() => id ? updateEntry() : saveEntry()}>
                         <div className="form-group">
                             <label htmlFor="code">Activity</label>
 
