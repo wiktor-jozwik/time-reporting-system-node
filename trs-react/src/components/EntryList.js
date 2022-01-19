@@ -3,6 +3,7 @@ import EntryDataService from "../services/EntryService";
 import {Link, useHistory} from "react-router-dom";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import moment from "moment";
+import {Button} from "antd";
 
 const EntryList = () => {
     const [date, setDate] = useState(moment())
@@ -65,8 +66,8 @@ const EntryList = () => {
         <div>
             <h1 className="header">Entries for {moment(date).format('YYYY-MM-DD')}</h1>
             <div>
-                <button onClick={goToNextDay}>Next day</button>
-                <button onClick={goToPreviousDay}>Previous day</button>
+                <Button type="primary" onClick={goToPreviousDay} className="button-margin">Previous day</Button>
+                <Button type="primary" onClick={goToNextDay} className="button-margin">Next day</Button>
             </div>
             <TableContainer>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -77,7 +78,7 @@ const EntryList = () => {
                             <TableCell align="right">Project Code</TableCell>
                             <TableCell align="right">Subcode</TableCell>
                             <TableCell align="right">Description</TableCell>
-                            <TableCell align="right">Action</TableCell>
+                            <TableCell colSpan={3} align="center">Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -92,19 +93,24 @@ const EntryList = () => {
                                 <TableCell align="right">{entry.subCode}</TableCell>
                                 <TableCell align="right">{entry.description}</TableCell>
                                 <TableCell align="right">
-                                    <Link to={"/entries/details/" + entry.id}>
-                                        Details
-                                    </Link>
-
-                                    <Link to={"/entries/edit/" + entry.id}>
-                                        Edit
-                                    </Link>
-
-                                    <button onClick={() => handleDelete(entry.id)}>
-                                        Delete
-                                    </button>
-
+                                    <Button type="ghost">
+                                        <Link to={"/entries/details/" + entry.id}>
+                                            Details
+                                        </Link>
+                                    </Button>
                                 </TableCell>
+                                <TableCell align="right">
+                                    <Button type="ghost">
+                                        <Link to={"/entries/edit/" + entry.id}>
+                                            Edit
+                                        </Link>
+                                    </Button>
+                            </TableCell>
+                            <TableCell align="right">
+                                    <Button danger onClick={() => handleDelete(entry.id)}>
+                                        Delete
+                                    </Button>
+                            </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

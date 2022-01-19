@@ -1,4 +1,5 @@
 import {useHistory} from "react-router-dom";
+import {Button} from "antd";
 
 const GoBackButton = () => {
     const history = useHistory()
@@ -8,9 +9,9 @@ const GoBackButton = () => {
     }
 
     return (
-        <button type="button" onClick={goBack}>
+        <Button className="button-margin" type="primary" onClick={goBack}>
             Go back
-        </button>
+        </Button>
     );
 }
 

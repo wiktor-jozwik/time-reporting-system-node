@@ -2,6 +2,7 @@ import Select from "react-select";
 import React, {useEffect, useState} from "react";
 import UserDataService from "../services/UserService";
 import {useHistory} from "react-router-dom";
+import {Button} from "antd";
 
 
 const Login = () => {
@@ -43,7 +44,7 @@ const Login = () => {
 
     return (
         <div>
-            <form onSubmit={() => logUser()}>
+            <form>
                 <div className="form-group">
                     <label htmlFor="code">Log user</label>
 
@@ -63,9 +64,9 @@ const Login = () => {
 
                 </div>
 
-                <button type="submit" className="btn btn-success">
+                <Button type="primary" onClick={() => logUser()}>
                     Submit
-                </button>
+                </Button>
             </form>
         </div>
     )

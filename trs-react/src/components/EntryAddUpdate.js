@@ -8,6 +8,7 @@ import 'react-calendar/dist/Calendar.css';
 import GoBackButton from "./GoBackButton";
 import moment from "moment";
 import {useHistory, useParams} from "react-router-dom";
+import {Button} from "antd";
 
 
 const EntryAddUpdate = () => {
@@ -90,7 +91,6 @@ const EntryAddUpdate = () => {
                     time: response.data.time,
                     activityId: response.data.activityId
                 });
-                console.log('test')
                 setSubmitted(true);
             })
             .catch(e => {
@@ -132,14 +132,14 @@ const EntryAddUpdate = () => {
         <div className="submit-form">
             {submitted ? (
                 <div>
-                    <h4>You submitted successfully!</h4>
-                    <button className="btn btn-success" onClick={newEntry}>
+                    <h4>Entry was saved!</h4>
+                    <Button type="primary" onClick={newEntry}>
                         Add
-                    </button>
+                    </Button>
                 </div>
             ) : (
                 <div>
-                    <form onSubmit={() => id ? updateEntry() : saveEntry()}>
+                    <form>
                         <div className="form-group">
                             <label htmlFor="code">Activity</label>
 
@@ -208,9 +208,9 @@ const EntryAddUpdate = () => {
                             />
                         </div>
 
-                        <button type="submit" className="btn btn-success">
+                        <Button className="button-margin" type="primary" onClick={() => id ? updateEntry() : saveEntry()}>
                             Submit
-                        </button>
+                        </Button>
 
                         <GoBackButton/>
                     </form>

@@ -1,11 +1,13 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+import "antd/dist/antd.css";
 import {Link, Route, Switch} from "react-router-dom";
 import EntryList from "./components/EntryList";
 import EntryAddUpdate from "./components/EntryAddUpdate";
 import EntryDetails from "./components/EntryDetails";
 import Login from "./components/Login";
 import Activities from "./components/Activities";
+
 
 const App = () => {
     return (

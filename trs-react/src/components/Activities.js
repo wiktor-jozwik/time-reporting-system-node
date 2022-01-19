@@ -13,7 +13,6 @@ const Activities = () => {
         ActivityDataService.getAll()
             .then(response => {
                 setActivities(response.data);
-                console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
