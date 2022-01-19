@@ -28,7 +28,7 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
     const userId = await getLoggedUserId()
 
-    return Entry.findAll({where: {userId}})
+    return Entry.findAll({where: {userId}, include: ['activity']})
         .then(data => {
             res.send(data)
         })
