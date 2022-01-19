@@ -1,12 +1,12 @@
 import http from "../common/HttpRequest";
 
 class UserDataService {
-    getLogged() {
-        return http.get("/users/logged");
+    getAll() {
+        return http.get("/users");
     }
 
     log(id) {
-        return http.get(`/users/login/${id}`);
+        return http.post(`/users/login/${id}`);
     }
 }
 

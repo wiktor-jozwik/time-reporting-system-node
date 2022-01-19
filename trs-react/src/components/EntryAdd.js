@@ -61,8 +61,6 @@ const EntryAdd = ({existingEntry}) => {
             activityId: entry.activityId
         };
 
-        console.log(data)
-
         EntryDataService.create(data)
             .then(response => {
                 setEntries({

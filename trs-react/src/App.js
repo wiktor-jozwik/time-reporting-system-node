@@ -33,10 +33,10 @@ const App = () => {
 
             <div className="container mt-3">
                 <Switch>
-                    <Route exact path="/login" component={Login}/>
+                    <Route exact path={["/", "/login"]} component={Login}/>
                     <Route exact path="/activities" component={Activities}/>
 
-                    <Route exact path={["/", "/entries"]} component={EntryList}/>
+                    <Route exact path="/entries" component={EntryList}/>
                     <Route exact path="/entries/add" component={EntryAdd}/>
                     <Route path="/entries/details/:id" component={Entry}/>
                 </Switch>
