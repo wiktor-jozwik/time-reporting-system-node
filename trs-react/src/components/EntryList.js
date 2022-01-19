@@ -49,6 +49,18 @@ const EntryList = () => {
             });
     }
 
+    const getTotalEntryTime = () => {
+        if (entries.length > 0) {
+            const minutes = entries.reduce((a, b) => ({time: a.time + b.time})).time
+
+            const hours = Math.floor(minutes / 60)
+            const minutesLeft = minutes - hours * 60
+
+            return `${hours} hour(s) ${minutesLeft} minute(s)`
+        }
+        return 0
+    }
+
     return (
         <div>
             <h1 className="header">Entries for {moment(date).format('YYYY-MM-DD')}</h1>
@@ -98,6 +110,7 @@ const EntryList = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <h3 className="header">Total spent time: {getTotalEntryTime()}</h3>
         </div>
     );
 };
