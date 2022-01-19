@@ -23,6 +23,10 @@ const App = () => {
                         <Link to={"/entries"} className="nav-link">
                             Entries
                         </Link>
+
+                        <Link to={"/entries/add"} className="nav-link">
+                            Add new entry
+                        </Link>
                     </li>
                 </div>
             </nav>
@@ -34,7 +38,7 @@ const App = () => {
 
                     <Route exact path={["/", "/entries"]} component={EntryList}/>
                     <Route exact path="/entries/add" component={EntryAdd}/>
-                    <Route path="/entries/:id" component={Entry}/>
+                    <Route path="/entries/details/:id" component={Entry}/>
                 </Switch>
             </div>
         </div>

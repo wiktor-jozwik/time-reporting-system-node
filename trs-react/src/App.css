@@ -40,3 +40,21 @@
 .form-control {
   margin-bottom: 1em;
 }
+
+.center {
+  width: 50%;
+  margin: 1em auto;
+}
+
+.header {
+  margin: 1em auto;
+}
+
+.entry-details {
+  font-size: 1.2em;
+}
+
+.entry-details > span {
+  color: #0b5ed7;
+  font-size: 1.4em;
+}
