@@ -5,26 +5,45 @@ import Select from "react-select";
 import Calendar from "react-calendar";
 
 import 'react-calendar/dist/Calendar.css';
+import GoBackButton from "./GoBackButton";
+import moment from "moment";
+import {useHistory} from "react-router-dom";
 
 
-const EntryAdd = ({existingEntry}) => {
+const EntryAddUpdate = (props) => {
     const [activities, setActivities] = useState([])
+    const history = useHistory()
 
-    const initialEntryState = existingEntry || {
+    const existingEntryId = props.match.params.id
+
+    const initialEntryState = {
         id: null,
-        date: new Date(),
+        date: moment(),
         subCode: "",
         description: "",
         time: null,
         activityId: null,
     };
-    const [entry, setEntries] = useState(initialEntryState);
+    const [entry, setEntry] = useState(initialEntryState);
     const [submitted, setSubmitted] = useState(false);
 
 
     useEffect(() => {
         fetchActivities();
+        if (existingEntryId) {
+            fetchExistingEntryId()
+        }
     }, []);
+
+    const fetchExistingEntryId = () => {
+        EntryDataService.get(existingEntryId)
+            .then(response => {
+                setEntry(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
 
     const fetchActivities = () => {
         ActivityDataService.getAll()
@@ -49,7 +68,7 @@ const EntryAdd = ({existingEntry}) => {
 
     const handleInputChange = event => {
         const {name, value} = event.target;
-        setEntries({...entry, [name]: value});
+        setEntry({...entry, [name]: value});
     };
 
     const saveEntry = () => {
@@ -63,7 +82,7 @@ const EntryAdd = ({existingEntry}) => {
 
         EntryDataService.create(data)
             .then(response => {
-                setEntries({
+                setEntry({
                     id: response.data.id,
                     date: response.data.date,
                     subCode: response.data.subCode,
@@ -78,10 +97,36 @@ const EntryAdd = ({existingEntry}) => {
             });
     };
 
+    const updateEntry = () => {
+        EntryDataService.update(existingEntryId, entry)
+            .then(() => {
+                setSubmitted(true);
+                history.push('/entries')
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+
     const newEntry = () => {
-        setEntries(initialEntryState);
+        setEntry(initialEntryState);
         setSubmitted(false);
     };
+
+    const findActivityLabel = (activityId) => {
+        const found = activities.find(act => act.value === activityId)
+
+        return found && found.label
+    }
+
+    const getSelectedActivity = () => {
+        if (entry) {
+            return {
+                value: entry.activityId,
+                label: findActivityLabel(entry.activityId)
+            }
+        }
+    }
 
     return (
         <div className="submit-form">
@@ -94,13 +139,14 @@ const EntryAdd = ({existingEntry}) => {
                 </div>
             ) : (
                 <div>
-                    <form onSubmit={() => saveEntry()}>
+                    <form onSubmit={() => existingEntryId ? updateEntry() : saveEntry()}>
                         <div className="form-group">
                             <label htmlFor="code">Activity</label>
 
                             <Select
-                                onChange={(event) => setEntries({...entry, activityId: event.value})}
+                                onChange={(event) => setEntry({...entry, activityId: event.value})}
                                 options={activities}
+                                value={getSelectedActivity()}
                             />
                             {
                                 <input
@@ -118,9 +164,9 @@ const EntryAdd = ({existingEntry}) => {
 
                             <label htmlFor="code">Date</label>
                             <Calendar
-                                onChange={(event) => setEntries({...entry, date: event})}
+                                onChange={(event) => setEntry({...entry, date: event})}
                                 className="form-control"
-                                value={entry.date}
+                                value={new Date(entry.date)}
                             />
                         </div>
 
@@ -165,6 +211,8 @@ const EntryAdd = ({existingEntry}) => {
                         <button type="submit" className="btn btn-success">
                             Submit
                         </button>
+
+                        <GoBackButton/>
                     </form>
 
                 </div>
@@ -173,4 +221,4 @@ const EntryAdd = ({existingEntry}) => {
     );
 };
 
-export default EntryAdd;
+export default EntryAddUpdate;

@@ -55,8 +55,12 @@ const EntryList = ({date}) => {
                                 <TableCell align="right">{entry.subCode}</TableCell>
                                 <TableCell align="right">{entry.description}</TableCell>
                                 <TableCell align="right">
-                                    <Link to={"/entries/details/" + entry.id} >
+                                    <Link to={"/entries/details/" + entry.id}>
                                         Details
+                                    </Link>
+
+                                    <Link to={"/entries/edit/" + entry.id}>
+                                        Edit
                                     </Link>
 
                                 </TableCell>

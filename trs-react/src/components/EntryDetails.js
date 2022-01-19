@@ -3,8 +3,9 @@ import EntryDataService from "../services/EntryService";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import moment from "moment";
 import {Link} from "react-router-dom";
+import GoBackButton from "./GoBackButton";
 
-const Entry = (props) => {
+const EntryDetails = (props) => {
     const [entry, setEntry] = useState()
     const id = props.match.params.id
 
@@ -30,16 +31,28 @@ const Entry = (props) => {
                 <div>
                     <h1 className="header">Details of entry with id: {id}</h1>
                     <div>
-                        <p className="entry-details"><span>Date:</span> {moment(entry.date).format('YYYY-MM-DD')}</p>
-                        <p className="entry-details"><span>Activity Code:</span> {entry.activity && entry.activity.code}</p>
-                        <p className="entry-details"><span>Subcode:</span> {entry.subCode}</p>
-                        <p className="entry-details"><span>Time:</span> {entry.time}</p>
-                        <p className="entry-details"><span>Description:</span> {entry.description}</p>
+                        <p className="entry-details">
+                            <span>Date:</span> {moment(entry.date).format('YYYY-MM-DD')}
+                        </p>
+                        <p className="entry-details">
+                            <span>Activity Code:</span> {entry.activity && entry.activity.code}
+                        </p>
+                        <p className="entry-details">
+                            <span>Subcode:</span> {entry.subCode}
+                        </p>
+                        <p className="entry-details">
+                            <span>Time:</span> {entry.time}
+                        </p>
+                        <p className="entry-details">
+                            <span>Description:</span> {entry.description}
+                        </p>
                     </div>
+
+                    <GoBackButton/>
                 </div>
             )}
         </div>
     )
 }
 
-export default Entry
+export default EntryDetails

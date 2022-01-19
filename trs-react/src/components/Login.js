@@ -46,7 +46,7 @@ const Login = () => {
             <form onSubmit={() => logUser()}>
                 <div className="form-group">
                     <label htmlFor="code">Log user</label>
-    
+
                     <Select
                         onChange={(event) => setUserId(event.value)}
                         options={users}
@@ -60,9 +60,9 @@ const Login = () => {
                             required
                         />
                     }
-    
+
                 </div>
-    
+
                 <button type="submit" className="btn btn-success">
                     Submit
                 </button>

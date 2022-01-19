@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import ActivityDataService from "../services/ActivityService";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import moment from "moment";
 
 const Activities = () => {
     const [activities, setActivities] = useState([])
@@ -24,7 +23,7 @@ const Activities = () => {
         <div>
             <h1 className="header">All activities</h1>
             <TableContainer>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell align="right">Code</TableCell>
@@ -36,7 +35,7 @@ const Activities = () => {
                         {activities.map((activity) => (
                             <TableRow
                                 key={activity.id}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell align="right">{activity.code}</TableCell>
                                 <TableCell align="right">{activity.budget}</TableCell>
