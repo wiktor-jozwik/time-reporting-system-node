@@ -34,7 +34,7 @@ const Login = () => {
     const logUser = () => {
         UserDataService.log(userId)
             .then(() => {
-                setTimeout(() => {  history.push("/entries") }, 10);
+                setTimeout(() => {  history.push("/entries") }, 30);
             })
             .catch(e => {
                 console.log(e);

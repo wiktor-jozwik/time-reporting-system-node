@@ -90,6 +90,7 @@ const EntryAddUpdate = () => {
                     time: response.data.time,
                     activityId: response.data.activityId
                 });
+                console.log('test')
                 setSubmitted(true);
             })
             .catch(e => {
@@ -101,7 +102,6 @@ const EntryAddUpdate = () => {
         EntryDataService.update(id, entry)
             .then(() => {
                 setSubmitted(true);
-                history.push('/entries')
             })
             .catch(e => {
                 console.log(e);

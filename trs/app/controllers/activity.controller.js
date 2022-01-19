@@ -22,7 +22,7 @@ exports.create = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Entry."
+                    err.message
             });
         });
 };
@@ -35,23 +35,7 @@ exports.findAll = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Entry."
+                    err.message
             });
         })
-};
-
-exports.findOne = (req, res) => {
-
-};
-
-exports.update = (req, res) => {
-
-};
-
-exports.delete = (req, res) => {
-
-};
-
-exports.findAllActive = (req, res) => {
-
 };
