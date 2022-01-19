@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const generateDbData = require("./app/services/generateDbData");
 
 const path = __dirname + '/app/views/';
 const app = express();
@@ -12,11 +13,11 @@ const corsOptions = {
 };
 
 const db = require("./app/models");
-// For development purposes
-db.sequelize.sync();
-// db.sequelize.sync({ force: true }).then(() => {
-//     console.log("Drop and re-sync db.");
-// });
+
+db.sequelize.sync().then(() => {
+    console.log("Generating DB data if not exist...");
+    generateDbData()
+});
 
 app.use(cors(corsOptions));
 

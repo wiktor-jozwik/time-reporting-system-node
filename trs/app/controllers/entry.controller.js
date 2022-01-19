@@ -20,20 +20,22 @@ exports.create = async (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Activity."
+                    err.message
             });
         });
 };
 
-exports.findAll = (req, res) => {
-    return Entry.findAll()
+exports.findAll = async (req, res) => {
+    const userId = await getLoggedUserId()
+
+    return Entry.findAll({where: {userId}, include: ['activity']})
         .then(data => {
             res.send(data)
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Activity."
+                    err.message
             });
         })
 };
@@ -54,7 +56,7 @@ exports.update = (req, res) => {
         .then(result => {
             if (result.includes(1)) {
                 res.send({
-                    message: "Activity was updated successfully."
+                    message: "Entry was updated successfully."
                 });
             } else {
                 console.log(result)
@@ -78,7 +80,7 @@ exports.delete = (req, res) => {
         .then(result => {
             if (result === 1) {
                 res.send({
-                    message: "Activity was deleted successfully."
+                    message: "Entry was deleted successfully."
                 });
             } else {
                 res.send({

@@ -18,7 +18,8 @@ exports.create = (req, res) => {
                 message:
                     err.message
             });
-        });}
+        });
+}
 
 exports.getLoggedUser = (req, res) => {
     User.findOne({where: {logged: true}, include: ['entries']})
