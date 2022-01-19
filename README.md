@@ -1,6 +1,6 @@
 # NTR TRS LAB 4
 # Wiktor Jóźwik
-### REACT + NODE JS
+### REACT + NODE JS(Express) + POSTGRESQL
 
 ### Jak uruchomić projekt
 
