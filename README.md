@@ -8,8 +8,11 @@ The project was created during my 5th semester of CS at Warsaw University of Tec
 
 ## How to run?
 `cd trs`
+
 `docker-compose up`
+
 `sudo chmod +x build-front-for-production.sh`
+
 `./build-front-for-production.sh`
 
 Backend in this case serves static files. The application works on one port *localhost:8000*
